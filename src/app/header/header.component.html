@@ -1,0 +1,19 @@
+<nav>
+  <mat-toolbar class="app-doc-header">
+    <a mat-button color="primary" routerLink="/">
+      <mat-icon>local_fire_department</mat-icon>
+      <span>YAYA-GO</span>
+    </a>
+
+    <span class="app-spacer"></span>
+
+    <button mat-button [matMenuTriggerFor]="menu" color="primary">
+      <mat-icon>person</mat-icon> <span>{{ user?.displayName }}</span>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>Item 1</button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item (click)="signout()">Sign Out</button>
+    </mat-menu>
+  </mat-toolbar>
+</nav>

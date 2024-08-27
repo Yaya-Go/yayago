@@ -1,0 +1,22 @@
+.verify-email-container {
+  margin: auto;
+  padding: 10rem 1.5rem;
+  width: fit-content;
+
+  .verify-email-card {
+    max-width: calc(100vw - 3rem);
+    width: 40rem;
+
+    .verify-email-content {
+      &.mat-mdc-card-content {
+        padding-top: 2rem;
+        padding-right: 2rem;
+        padding-left: 2rem;
+      }
+
+      .mat-mdc-form-field {
+        width: 100%;
+      }
+    }
+  }
+}

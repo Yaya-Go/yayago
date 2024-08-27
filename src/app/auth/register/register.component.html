@@ -1,0 +1,59 @@
+<div class="register-container">
+  <mat-card class="register-card" appearance="outlined">
+    <mat-card-header class="mx-auto">
+      <mat-card-title>Register</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content class="register-content">
+      <form (ngSubmit)="register()" [formGroup]="registerForm">
+        <mat-form-field>
+          <mat-label>Enter your email</mat-label>
+          <input
+            matInput
+            type="email"
+            placeholder="pat@example.com"
+            formControlName="email"
+            (blur)="updateErrorMessage('email')"
+            required
+          />
+          @if (registerForm.controls['email'].invalid) {
+          <mat-error>{{ errorMessage() }}</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Enter your password</mat-label>
+          <input
+            matInput
+            type="password"
+            formControlName="password"
+            (blur)="updateErrorMessage('password')"
+            required
+          />
+          @if (registerForm.controls['password'].invalid) {
+          <mat-error>{{ errorMessage() }}</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Enter your display name</mat-label>
+          <input
+            matInput
+            type="text"
+            formControlName="displayName"
+            (blur)="updateErrorMessage('displayName')"
+            required
+          />
+          @if (registerForm.controls['displayName'].invalid) {
+          <mat-error>{{ errorMessage() }}</mat-error>
+          }
+        </mat-form-field>
+      </form>
+      <p>
+        Already have an account?
+        <a mat-button [routerLink]="['/login']">Login</a>
+      </p>
+    </mat-card-content>
+    <mat-card-actions class="mx-auto">
+      <button mat-flat-button (click)="register()">Register</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

@@ -1,0 +1,18 @@
+<div class="verify-email-container">
+  <mat-card class="verify-email-card" appearance="outlined">
+    <mat-card-header class="mx-auto">
+      <mat-card-title>Verify email</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content class="verify-email-content">
+      <p>Please check your inbox or junk email, and verify your email.</p>
+      <p class="d-flex">
+        <span class="my-auto">Back to </span>
+        <a mat-button [routerLink]="['/login']">Login</a>
+      </p>
+    </mat-card-content>
+    <mat-card-actions class="mx-auto">
+      <button mat-flat-button (click)="resend()">Resend</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
