@@ -1,25 +1,12 @@
-import {
-  ApplicationConfig,
-  importProvidersFrom,
-  provideZoneChangeDetection,
-} from '@angular/core';
+import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { getApp, initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import {
-  browserPopupRedirectResolver,
-  browserSessionPersistence,
-  connectAuthEmulator,
-  getAuth,
-  indexedDBLocalPersistence,
-  initializeAuth,
-  provideAuth,
-} from '@angular/fire/auth';
+import { connectAuthEmulator, getAuth, provideAuth } from '@angular/fire/auth';
 import {
   connectFirestoreEmulator,
-  getFirestore,
   initializeFirestore,
   provideFirestore,
 } from '@angular/fire/firestore';
@@ -37,8 +24,6 @@ import {
 } from '@angular/fire/storage';
 
 import { environment } from '../environments/environment';
-import { AuthService } from './core/services/auth.service';
-import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 
 export const appConfig: ApplicationConfig = {
   providers: [

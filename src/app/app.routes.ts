@@ -2,14 +2,13 @@ import { Routes } from '@angular/router';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
-import { HomeComponent } from './home/home.component';
-import { authGuard, loginGuard } from './core/guards/auth.guard';
 import { VerifyEmailComponent } from './auth/verify-email/verify-email.component';
+import { authGuard, loginGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
   {
-    path: 'home',
-    component: HomeComponent,
+    path: '',
+    loadChildren: () => import('./home/home.routes').then((r) => r.homeRoutes),
     canActivate: [authGuard],
   },
   {
@@ -30,13 +29,8 @@ export const routes: Routes = [
     canActivate: [loginGuard],
   },
   {
-    path: '',
-    redirectTo: '/home',
-    pathMatch: 'full',
-  },
-  {
     path: '**',
-    redirectTo: '/home',
+    redirectTo: '/',
     pathMatch: 'full',
   },
 ];

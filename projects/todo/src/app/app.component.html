@@ -1,0 +1,71 @@
+<div class="todo-header d-flex">
+  <h1>Todo List</h1>
+  <span class="app-spacer"></span>
+  <button mat-fab (click)="addTodo()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+<div class="todo-content">
+  <table
+    mat-table
+    [dataSource]="(list$ | async) ?? []"
+    class="mat-elevation-z8"
+  >
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef>Status</th>
+      <td mat-cell *matCellDef="let todo">
+        @if (todo.done) {
+        <button mat-icon-button>
+          <mat-icon class="success">task_alt</mat-icon>
+        </button>
+        } @else {
+        <button mat-icon-button color="primary">
+          <mat-icon>checklist</mat-icon>
+        </button>
+        }
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td
+        mat-cell
+        *matCellDef="let todo"
+        [ngClass]="{ 'text-line-through': todo.done }"
+      >
+        {{ todo.name }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="createdAt">
+      <th mat-header-cell *matHeaderCellDef>Created At</th>
+      <td mat-cell *matCellDef="let todo">
+        {{ todo.createdAt | date : "longDate" }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef class="text-right">Actions</th>
+      <td mat-cell *matCellDef="let todo" class="text-right">
+        <button mat-icon-button (click)="openDialog(todo)">
+          <mat-icon class="info">description</mat-icon>
+        </button>
+        <button mat-icon-button (click)="editTodo(todo.name, todo.id)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          color="primary"
+          (click)="deleteTodo(todo.name, todo.id)"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <tr
+      mat-header-row
+      *matHeaderRowDef="['status', 'name', 'createdAt', 'actions']"
+    ></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: ['status', 'name', 'createdAt', 'actions']"
+    ></tr>
+  </table>
+</div>

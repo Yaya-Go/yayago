@@ -6,26 +6,24 @@ export const authGuard: CanActivateFn = (route, state) => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  // if (!authService.isLoggedIn) {
-  //   router.navigate(['login']);
-  // }
+  if (!authService.isLoggedIn) {
+    router.navigate(['login']);
+  }
 
-  // if (!authService.isVerify) {
-  //   router.navigate(['verify-email']);
-  // }
+  if (!authService.isVerify) {
+    router.navigate(['verify-email']);
+  }
 
-  // return authService.isLoggedIn && authService.isVerify;
-  return true;
+  return authService.isLoggedIn && authService.isVerify;
 };
 
 export const loginGuard: CanActivateFn = (route, state) => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  // if (!authService.isLoggedIn) {
-  //   router.navigate(['login']);
-  // }
+  if (!authService.isLoggedIn) {
+    router.navigate(['login']);
+  }
 
-  // return authService.isLoggedIn;
-  return true;
+  return authService.isLoggedIn;
 };

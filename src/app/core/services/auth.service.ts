@@ -8,7 +8,6 @@ import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
   sendPasswordResetEmail,
-  updateCurrentUser,
   updateProfile,
 } from '@angular/fire/auth';
 import { doc, Firestore, setDoc } from '@angular/fire/firestore';
@@ -18,7 +17,8 @@ import { doc, Firestore, setDoc } from '@angular/fire/firestore';
 })
 export class AuthService {
   private authState;
-  userData = signal<User | null>(null);
+  user$ = signal<User | null>(null);
+  userData: User | null;
 
   constructor(
     public firestore: Firestore,
@@ -30,10 +30,13 @@ export class AuthService {
 
       this.authState.subscribe((user: any) => {
         if (user) {
-          this.userData.set(user);
-          localStorage.setItem('user', JSON.stringify(this.userData()));
+          this.user$.set(user);
+          this.userData = user;
+          localStorage.setItem('user', JSON.stringify(this.userData));
           JSON.parse(localStorage.getItem('user')!);
         } else {
+          this.user$.set(null);
+          this.userData = null;
           localStorage.setItem('user', 'null');
           JSON.parse(localStorage.getItem('user')!);
         }
