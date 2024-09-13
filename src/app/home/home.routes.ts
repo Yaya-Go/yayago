@@ -18,6 +18,13 @@ export const homeRoutes: Routes = [
             (c) => c.AppComponent
           ),
       },
+      {
+        path: 'project-management',
+        loadChildren: () =>
+          import('../../../projects/pm/src/app/app.routes').then(
+            (r) => r.routes
+          ),
+      },
     ],
   },
 ];

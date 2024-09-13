@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>Add new note</h2>
+<mat-dialog-content>
+  <form [formGroup]="noteForm" class="project-note-form">
+    <mat-form-field class="w-100">
+      <mat-label>Note</mat-label>
+      <textarea matInput formControlName="note"></textarea>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button cdkFocusInitial (click)="addNote()">Ok</button>
+</mat-dialog-actions>

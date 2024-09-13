@@ -37,6 +37,10 @@ body {
   margin: auto;
 }
 
+.ml-auto {
+  margin-left: auto !important;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -47,6 +51,30 @@ body {
   margin-bottom: auto;
 }
 
+.mt-auto {
+  margin-top: auto;
+}
+
+.ml-1 {
+  margin-left: 0.5rem;
+}
+
+.mb-3 {
+  margin-bottom: 2rem;
+}
+
+.p-2 {
+  padding: 1rem;
+}
+
+.p-4 {
+  padding: 3rem;
+}
+
 .d-flex {
   display: flex;
+}
+
+.w-100 {
+  width: 100% !important;
 }

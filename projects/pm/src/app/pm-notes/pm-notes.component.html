@@ -1,0 +1,51 @@
+<div class="project-notes p-4">
+  <div class="project-notes-header d-flex">
+    <h4 class="ml-auto">Notes</h4>
+    <button mat-icon-button color="primary" (click)="addNote()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+  <div class="project-notes-list">
+    <table
+      mat-table
+      [dataSource]="(notes$ | async) ?? []"
+      class="mat-elevation-z8"
+    >
+      <ng-container matColumnDef="index">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let note">
+          @if (note.done) {
+          <mat-icon class="success">check_circle</mat-icon>
+          }
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="note">
+        <th mat-header-cell *matHeaderCellDef>Note</th>
+        <td mat-cell *matCellDef="let note">{{ note.note }}</td>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef class="text-right">Actions</th>
+        <td mat-cell *matCellDef="let note" class="text-right">
+          <button mat-icon-button (click)="makeDone(note)">
+            @if (note.done) {
+            <mat-icon>cancel</mat-icon>
+            } @else {
+            <mat-icon>check_box</mat-icon>
+            }
+          </button>
+          <button mat-icon-button (click)="addNote(note)">
+            <mat-icon class="info">edit</mat-icon>
+          </button>
+          <button mat-icon-button (click)="deleteNote(note)" color="primary">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="['index', 'note', 'actions']"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: ['index', 'note', 'actions']"
+      ></tr>
+    </table>
+  </div>
+</div>

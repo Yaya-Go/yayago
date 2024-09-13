@@ -1,0 +1,10 @@
+<div class="pm-type d-flex">
+  @switch (type) { @case (pmType.IMPORT) {
+  <mat-icon class="import-type">upload_file</mat-icon>
+  } @case (pmType.EXPORT) {
+  <mat-icon class="export-type">difference</mat-icon>
+  } @case (pmType.WEBSERVICE) {
+  <mat-icon class="webservice-type">api</mat-icon>
+  } }
+  <span class="pm-type-text my-auto">{{ type | titlecase }}</span>
+</div>

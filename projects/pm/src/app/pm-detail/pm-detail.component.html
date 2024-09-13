@@ -1,0 +1,75 @@
+<div class="pm-detail" *ngIf="project">
+  <div class="pm-detail-header">
+    <div class="back-button">
+      <a mat-button class="d-flex" routerLink="/project-management">
+        <mat-icon>arrow_back</mat-icon>
+        <span>Back</span>
+      </a>
+    </div>
+    <div class="pm-detail-header-content d-flex mb-3">
+      <h1>{{ project.name }}</h1>
+      <div class="pm-detail-actions my-auto">
+        <button mat-icon-button color="primary" (click)="editProject()">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="pm-detail-body">
+    <mat-sidenav-container class="pm-detail-container">
+      <mat-sidenav mode="side" opened>
+        <mat-list>
+          <mat-list-item>
+            <div class="d-flex">
+              <span class="my-auto">Case Number</span>
+              <span class="app-spacer"></span>
+              <span>{{ project.caseNumber }}</span>
+            </div>
+          </mat-list-item>
+          <mat-list-item>
+            <div class="d-flex">
+              <span class="my-auto">Type</span>
+              <span class="app-spacer"></span>
+              <app-pm-type [type]="project.type"></app-pm-type>
+            </div>
+          </mat-list-item>
+          <mat-list-item>
+            <div class="d-flex">
+              <span class="my-auto">Status</span>
+              <span class="app-spacer"></span>
+              <app-pm-status [status]="project.status"></app-pm-status>
+            </div>
+          </mat-list-item>
+          <mat-list-item>
+            <div class="d-flex">
+              <span class="my-auto">Created At</span>
+              <span class="app-spacer"></span>
+              <div class="d-flex">
+                <mat-icon matListItemIcon>schedule</mat-icon>
+                <span class="ml-1 my-auto">{{ project.createdAt | date }}</span>
+              </div>
+            </div>
+          </mat-list-item>
+          <mat-list-item>
+            <div class="d-flex">
+              <span class="my-auto">Updated At</span>
+              <span class="app-spacer"></span>
+              <div class="d-flex">
+                <mat-icon matListItemIcon>schedule</mat-icon>
+                <span class="ml-1 my-auto">{{ project.updatedAt | date }}</span>
+              </div>
+            </div>
+          </mat-list-item>
+          <mat-list-item>
+            <button mat-flat-button class="w-100" (click)="deleteProject()">
+              Delete
+            </button>
+          </mat-list-item>
+        </mat-list>
+      </mat-sidenav>
+      <mat-sidenav-content>
+        <app-pm-notes [projectId]="project.id ?? ''"></app-pm-notes>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>
+</div>

@@ -1,0 +1,84 @@
+<div class="pm-header">
+  <h1>Project Management</h1>
+</div>
+<div class="pm-content">
+  <table
+    mat-table
+    [dataSource]="(list$ | async) ?? []"
+    class="mat-elevation-z8"
+  >
+    <ng-container matColumnDef="index">
+      <th mat-header-cell *matHeaderCellDef>#</th>
+      <td mat-cell *matCellDef="let todo; let i = index">
+        {{ i + 1 }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let project">
+        {{ project.name }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="caseNumber">
+      <th mat-header-cell *matHeaderCellDef>Case Number</th>
+      <td mat-cell *matCellDef="let project">
+        {{ project.caseNumber }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef>Type</th>
+      <td mat-cell *matCellDef="let project">
+        <app-pm-type [type]="project.type"></app-pm-type>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef>Status</th>
+      <td mat-cell *matCellDef="let project">
+        <app-pm-status [status]="project.status"></app-pm-status>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>
+        <p class="actions">
+          <span>Actions</span>
+          <button mat-icon-button>
+            <mat-icon color="primary" (click)="addProject()">add</mat-icon>
+          </button>
+        </p>
+      </th>
+      <td mat-cell *matCellDef="let project" class="text-right">
+        <button
+          mat-icon-button
+          [routerLink]="'/project-management/' + project.id"
+        >
+          <mat-icon class="info">description</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          color="primary"
+          (click)="deleteProject(project.name, project.id)"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <tr
+      mat-header-row
+      *matHeaderRowDef="[
+        'index',
+        'name',
+        'caseNumber',
+        'type',
+        'status',
+        'actions'
+      ]"
+    ></tr>
+    <tr
+      mat-row
+      *matRowDef="
+        let row;
+        columns: ['index', 'name', 'caseNumber', 'type', 'status', 'actions']
+      "
+    ></tr>
+  </table>
+</div>

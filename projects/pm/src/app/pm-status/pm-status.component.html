@@ -1,0 +1,21 @@
+<div class="pm-status">
+  @switch (status) { @case (pmStatus.TODO) {
+  <button mat-flat-button disabled>
+    {{ status | uppercase }}
+  </button>
+  } @case (pmStatus.INPROCESS) {
+  <button mat-flat-button class="status-in-process">
+    {{ status | uppercase }}
+  </button>
+  } @case (pmStatus.TESTING) {
+  <button mat-flat-button>{{ status | uppercase }}</button>
+  } @case (pmStatus.INPROD) {
+  <button mat-flat-button class="status-in-prod">
+    {{ status | uppercase }}
+  </button>
+  } @case (pmStatus.COMPLETE) {
+  <button mat-flat-button class="status-complete">
+    {{ status | uppercase }}
+  </button>
+  } }
+</div>
