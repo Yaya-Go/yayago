@@ -16,7 +16,7 @@ import {
 import { AuthService } from '../../../../src/app/core/services/auth.service';
 import { Observable } from 'rxjs';
 
-export interface Todo {
+export interface ITodo {
   id: string;
   name: string;
   createdAt: string;
@@ -25,7 +25,7 @@ export interface Todo {
   done: boolean;
 }
 
-export interface TodoItem {
+export interface ITodoItem {
   id: string;
   name: string;
   createdAt: string;
@@ -60,7 +60,7 @@ export class TodoService {
         orderBy('createdAt', 'desc')
       ),
       { idField: 'id' }
-    ) as Observable<Todo[]>;
+    ) as Observable<ITodo[]>;
   }
 
   getTodo(id: string) {
@@ -71,7 +71,7 @@ export class TodoService {
   createTodo(name: string) {
     const id = doc(collection(this.firestore, '_')).id;
 
-    const newTodo: Todo = {
+    const newTodo: ITodo = {
       id,
       name,
       done: false,
@@ -118,12 +118,12 @@ export class TodoService {
         orderBy('name', 'asc')
       ),
       { idField: 'id' }
-    ) as Observable<TodoItem[]>;
+    ) as Observable<ITodoItem[]>;
   }
 
   createItem(todoId: string, name: string) {
     const id = doc(collection(this.firestore, '_')).id;
-    const newItem: TodoItem = {
+    const newItem: ITodoItem = {
       id,
       name,
       done: false,

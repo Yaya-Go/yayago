@@ -3,7 +3,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
-import { Todo, TodoItem, TodoService } from './todo.service';
+import { ITodo, ITodoItem, TodoService } from './todo.service';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
@@ -23,7 +23,7 @@ import { TodoDetailComponent } from './todo-detail/todo-detail.component';
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
-  list$: Observable<Todo[]>;
+  list$: Observable<ITodo[]>;
   private readonly todoService = inject(TodoService);
   private readonly dialog = inject(MatDialog);
 
@@ -53,16 +53,16 @@ export class AppComponent implements OnInit {
     }
   }
 
-  openDialog(todo: Todo): void {
+  openDialog(todo: ITodo): void {
     const dialogRef = this.dialog.open(TodoDetailComponent, {
       data: { todo },
       width: '600px',
       disableClose: true,
     });
 
-    dialogRef.afterClosed().subscribe((result: TodoItem[]) => {
+    dialogRef.afterClosed().subscribe((result: ITodoItem[]) => {
       if (result?.length > 0) {
-        const allDone = result.find((res: TodoItem) => !res.done);
+        const allDone = result.find((res: ITodoItem) => !res.done);
 
         if (!allDone) {
           if (!todo.done) {

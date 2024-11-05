@@ -12,7 +12,7 @@ import {
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { Project, PROJECT_STATUS, PROJECT_TYPE } from '../pm.service';
+import { IProject, PROJECT_STATUS, PROJECT_TYPE } from '../pm.service';
 import {
   FormControl,
   FormGroup,
@@ -40,7 +40,7 @@ import {
 })
 export class PmAddComponent implements OnInit {
   readonly dialogRef = inject(MatDialogRef<PmAddComponent>);
-  readonly data = inject<{ project: Project }>(MAT_DIALOG_DATA);
+  readonly data = inject<{ project: IProject }>(MAT_DIALOG_DATA);
   readonly project = model(this.data?.project);
 
   pmForm: FormGroup;
@@ -75,7 +75,7 @@ export class PmAddComponent implements OnInit {
   addProject() {
     if (this.pmForm.invalid) return;
 
-    let newProject: Project;
+    let newProject: IProject;
     if (this.project()) {
       newProject = {
         ...this.project(),

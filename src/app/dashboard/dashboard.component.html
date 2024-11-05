@@ -8,21 +8,14 @@
     </mat-card-actions>
   </mat-card>
 
+  @for (app of appList; track app.name) {
   <mat-card class="app-card" appearance="outlined">
     <mat-card-header>
-      <mat-card-title>Todo List</mat-card-title>
+      <mat-card-title>{{ app.name }}</mat-card-title>
     </mat-card-header>
     <mat-card-actions>
-      <a mat-button [routerLink]="['/todo']">Learn More</a>
+      <a mat-button [routerLink]="app.routerLink">Learn More</a>
     </mat-card-actions>
   </mat-card>
-
-  <mat-card class="app-card" appearance="outlined">
-    <mat-card-header>
-      <mat-card-title>Project Management</mat-card-title>
-    </mat-card-header>
-    <mat-card-actions>
-      <a mat-button [routerLink]="['/project-management']">Learn More</a>
-    </mat-card-actions>
-  </mat-card>
+  }
 </div>

@@ -1,4 +1,4 @@
-import { computed, effect, Injectable } from '@angular/core';
+import { effect, Injectable } from '@angular/core';
 import {
   collection,
   collectionData,
@@ -17,7 +17,7 @@ import {
 import { AuthService } from '../../../../src/app/core/services/auth.service';
 import { Observable } from 'rxjs';
 
-export interface Project {
+export interface IProject {
   id?: string;
   name: string;
   caseNumber: string;
@@ -42,7 +42,7 @@ export enum PROJECT_STATUS {
   COMPLETE = 'complete',
 }
 
-export interface ProjectNote {
+export interface IProjectNote {
   id?: string;
   note: string;
   done?: boolean;
@@ -62,7 +62,10 @@ export class PmService {
   private collections: CollectionReference<DocumentData>;
   private notesCollection: CollectionReference<DocumentData>;
 
-  constructor(private firestore: Firestore, private auth: AuthService) {
+  constructor(
+    private firestore: Firestore,
+    private auth: AuthService,
+  ) {
     effect(() => {
       this.userId = this.auth.user$()?.uid || '';
     });
@@ -71,17 +74,12 @@ export class PmService {
   }
 
   getAll() {
-    return collectionData(
-      query(
-        this.collections,
-        where('userId', '==', this.userId),
-        orderBy('createdAt', 'desc')
-      ),
-      { idField: 'id' }
-    ) as Observable<Project[]>;
+    return collectionData(query(this.collections, where('userId', '==', this.userId), orderBy('createdAt', 'desc')), {
+      idField: 'id',
+    }) as Observable<IProject[]>;
   }
 
-  addProject(project: Project) {
+  addProject(project: IProject) {
     const id = doc(collection(this.firestore, '_')).id;
 
     const newProject = {
@@ -102,7 +100,7 @@ export class PmService {
     return docData(reference, { idField: 'id' });
   }
 
-  updateProject(project: Project) {
+  updateProject(project: IProject) {
     const reference = doc(this.firestore, `${this.PM}/${project.id}`);
     return updateDoc(reference, {
       ...project,
@@ -121,10 +119,10 @@ export class PmService {
         this.notesCollection,
         where('projectId', '==', projectId),
         where('userId', '==', this.userId),
-        orderBy('createdAt', 'desc')
+        orderBy('createdAt', 'desc'),
       ),
-      { idField: 'id' }
-    ) as Observable<ProjectNote[]>;
+      { idField: 'id' },
+    ) as Observable<IProjectNote[]>;
   }
 
   addNote(projectId: string, note: string) {
@@ -141,7 +139,7 @@ export class PmService {
     });
   }
 
-  updateNote(note: ProjectNote) {
+  updateNote(note: IProjectNote) {
     const reference = doc(this.firestore, `${this.NOTES}/${note.id}`);
     return updateDoc(reference, {
       ...note,
@@ -149,7 +147,7 @@ export class PmService {
     });
   }
 
-  deleteNote(note: ProjectNote) {
+  deleteNote(note: IProjectNote) {
     const reference = doc(this.firestore, `${this.NOTES}/${note.id}`);
     return deleteDoc(reference);
   }

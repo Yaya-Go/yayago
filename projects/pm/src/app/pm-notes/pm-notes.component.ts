@@ -1,6 +1,6 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ProjectNote, PmService } from '../pm.service';
+import { IProjectNote, PmService } from '../pm.service';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -17,7 +17,7 @@ import { MatTableModule } from '@angular/material/table';
 })
 export class PmNotesComponent implements OnInit {
   @Input() projectId!: string;
-  notes$: Observable<ProjectNote[]>;
+  notes$: Observable<IProjectNote[]>;
 
   private readonly dialog = inject(MatDialog);
 
@@ -27,14 +27,14 @@ export class PmNotesComponent implements OnInit {
     this.notes$ = this.pmService.getNotes(this.projectId);
   }
 
-  addNote(note?: ProjectNote) {
+  addNote(note?: IProjectNote) {
     const dialogRef = this.dialog.open(PmAddNoteComponent, {
       width: '600px',
       disableClose: true,
       data: { note },
     });
 
-    dialogRef.afterClosed().subscribe((result: ProjectNote) => {
+    dialogRef.afterClosed().subscribe((result: IProjectNote) => {
       if (result) {
         if (result.id) {
           this.pmService.updateNote(result);
@@ -45,11 +45,11 @@ export class PmNotesComponent implements OnInit {
     });
   }
 
-  makeDone(note: ProjectNote) {
+  makeDone(note: IProjectNote) {
     this.pmService.updateNote({ ...note, done: !note.done });
   }
 
-  deleteNote(note: ProjectNote) {
+  deleteNote(note: IProjectNote) {
     if (confirm('Are you sure you want to delete this note?')) {
       this.pmService.deleteNote(note);
     }

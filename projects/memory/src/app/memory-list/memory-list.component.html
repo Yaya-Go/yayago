@@ -1,0 +1,26 @@
+<div class="memory">
+  <div class="memory-container">
+    <ng-container *ngIf="(list$ | async)?.length; else empty">
+      @for (memory of list$ | async; track $index) {
+        <mat-card class="memory-card" appearance="outlined">
+          <mat-card-header>
+            <mat-card-title-group>
+              <mat-card-title>{{ memory.name }}</mat-card-title>
+              <mat-card-subtitle>{{ memory.date }}</mat-card-subtitle>
+              <img *ngIf="memory.backgroundImg" mat-card-md-image [src]="memory.backgroundImg" alt="" />
+            </mat-card-title-group>
+          </mat-card-header>
+          <mat-card-content>
+            {{ memory.description }}
+          </mat-card-content>
+        </mat-card>
+      }
+    </ng-container>
+  </div>
+</div>
+
+<ng-template #empty>
+  <div class="empty-memory">
+    <h4>You don't have momery yet, please <a [routerLink]="['./new']">add one</a> now</h4>
+  </div>
+</ng-template>

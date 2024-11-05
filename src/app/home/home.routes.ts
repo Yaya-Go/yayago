@@ -25,6 +25,13 @@ export const homeRoutes: Routes = [
             (r) => r.routes
           ),
       },
+      {
+        path: 'memory',
+        loadChildren: () =>
+          import('../../../projects/memory/src/app/app.routes').then(
+            (r) => r.routes
+          ),
+      },
     ],
   },
 ];

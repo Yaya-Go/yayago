@@ -7,7 +7,7 @@ import {
   MatDialogClose,
   MatDialogTitle,
 } from '@angular/material/dialog';
-import { ProjectNote } from '../pm.service';
+import { IProjectNote } from '../pm.service';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -31,7 +31,7 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class PmAddNoteComponent implements OnInit {
   readonly dialogRef = inject(MatDialogRef<PmAddNoteComponent>);
-  readonly data = inject<{ note: ProjectNote }>(MAT_DIALOG_DATA);
+  readonly data = inject<{ note: IProjectNote }>(MAT_DIALOG_DATA);
   readonly note = model(this.data?.note);
 
   noteForm: FormGroup;
@@ -55,7 +55,7 @@ export class PmAddNoteComponent implements OnInit {
   addNote() {
     if (this.noteForm.invalid) return;
 
-    let newNote: ProjectNote;
+    let newNote: IProjectNote;
     if (this.note()) {
       newNote = {
         ...this.note(),

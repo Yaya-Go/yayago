@@ -5,7 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import {
   PmService,
-  Project,
+  IProject,
   PROJECT_STATUS,
   PROJECT_TYPE,
 } from '../pm.service';
@@ -33,7 +33,7 @@ import { PmStatusComponent } from '../pm-status/pm-status.component';
   styleUrl: './pm-list.component.scss',
 })
 export class PmListComponent implements OnInit {
-  list$: Observable<Project[]>;
+  list$: Observable<IProject[]>;
   private readonly pmService = inject(PmService);
   private readonly dialog = inject(MatDialog);
 
@@ -60,5 +60,9 @@ export class PmListComponent implements OnInit {
     });
   }
 
-  deleteProject(name: string, id: string) {}
+  deleteProject(name: string, id: string) {
+    if (confirm(`Are you sure you want to delete ${name}`)) {
+      this.pmService.deleteProject(id);
+    }
+  }
 }

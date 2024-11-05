@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { PmService, Project, ProjectNote } from '../pm.service';
-import { Observable, switchMap } from 'rxjs';
+import { PmService, IProject } from '../pm.service';
+import { switchMap } from 'rxjs';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -33,7 +33,7 @@ import { PmNotesComponent } from '../pm-notes/pm-notes.component';
   styleUrl: './pm-detail.component.scss',
 })
 export class PmDetailComponent {
-  project: Project;
+  project: IProject;
 
   private readonly dialog = inject(MatDialog);
 
@@ -58,7 +58,7 @@ export class PmDetailComponent {
       disableClose: true,
     });
 
-    dialogRef.afterClosed().subscribe((result: Project) => {
+    dialogRef.afterClosed().subscribe((result: IProject) => {
       if (result) {
         if (result.id) {
           this.pmService.updateProject(result);

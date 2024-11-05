@@ -11,4 +11,19 @@ import { RouterModule } from '@angular/router';
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
-export class DashboardComponent {}
+export class DashboardComponent {
+  appList = [
+    {
+      name: 'Todo List',
+      routerLink: '/todo',
+    },
+    {
+      name: 'Project Management',
+      routerLink: '/project-management',
+    },
+    {
+      name: 'Memory',
+      routerLink: '/memory',
+    },
+  ];
+}

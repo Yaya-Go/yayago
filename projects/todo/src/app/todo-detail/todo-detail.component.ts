@@ -8,7 +8,7 @@ import {
   MatDialogRef,
   MatDialogTitle,
 } from '@angular/material/dialog';
-import { Todo, TodoItem, TodoService } from '../todo.service';
+import { ITodo, ITodoItem, TodoService } from '../todo.service';
 import { Observable } from 'rxjs';
 import { MatTableModule } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
@@ -34,11 +34,11 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class TodoDetailComponent implements OnInit {
   readonly dialogRef = inject(MatDialogRef<TodoDetailComponent>);
-  readonly data = inject<{ todo: Todo }>(MAT_DIALOG_DATA);
+  readonly data = inject<{ todo: ITodo }>(MAT_DIALOG_DATA);
   readonly todo = model(this.data.todo);
   private readonly todoService = inject(TodoService);
 
-  items$: Observable<TodoItem[]>;
+  items$: Observable<ITodoItem[]>;
 
   ngOnInit(): void {
     this.items$ = this.todoService.getTodoItems(this.todo().id);
